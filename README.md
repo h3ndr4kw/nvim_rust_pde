@@ -23,7 +23,7 @@ rm -fr ~/.config/nvim/lua/custom
 
 clone cpp Custom configuration
 ```
-$ git clone git@github.com:h3ndr4kw/nvim_cpp_pde.git ~/.config/nvim
+git clone https://github.com/h3ndr4kw/nvim_rust_pde.git ~/.config/nvim/lua/custom
 ```
 
 Add below in ~/.vimrc
@@ -40,7 +40,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 Then open up neovim and let everything install.
 
 ```
-:TSInstall cpp 
+:TSInstall rust
 ```
 
 Install Latest Tmux
