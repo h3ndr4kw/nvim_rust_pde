@@ -2,7 +2,6 @@ local cmp = require "cmp"
 
 local plugins = {
 
-
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim'},
@@ -11,6 +10,21 @@ local plugins = {
     end
   },
 
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      require("telescope").setup {
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+              -- even more opts
+            }
+          }
+        }
+      }
+      require("telescope").load_extension("ui-select")
+    end
+  },
 
   {
     -- Set lualine as statusline
@@ -26,7 +40,6 @@ local plugins = {
     },
   },
 
-
   {
     "okuuva/auto-save.nvim",
     cmd = "ASToggle", -- optional for lazy loading on command
@@ -37,15 +50,10 @@ local plugins = {
     },
   },
 
-
-
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
-
-
-  
 
   {
     "williamboman/mason.nvim",
@@ -55,13 +63,19 @@ local plugins = {
       },
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
+
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
+ 
     end,
   },
+
   {
     "simrat39/rust-tools.nvim",
     ft = "rust",
@@ -79,6 +93,7 @@ local plugins = {
       require("core.utils").load_mappings("dap")
     end
   },
+  
   {
     'saecki/crates.nvim',
     ft = {"toml"},
@@ -92,6 +107,7 @@ local plugins = {
       require("core.utils").load_mappings("crates")
     end,
   },
+
   {
     "rust-lang/rust.vim",
     ft = "rust",
@@ -99,6 +115,7 @@ local plugins = {
       vim.g.rustfmt_autosave = 1
     end
   },
+
   {
     "theHamsta/nvim-dap-virtual-text",
     lazy = false,
@@ -106,6 +123,7 @@ local plugins = {
       require("nvim-dap-virtual-text").setup()
     end
   },
+
   {
     "hrsh7th/nvim-cmp",
     opts = function()
